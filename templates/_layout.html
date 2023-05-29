@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <nav>  
+        {% if session["logged_in"] %}
+            Welcome {{ session["first_name"] }}
+            <a href="/logout">Logout !</a>
+        {% else %}   
+            You are not logged in
+            <a href="/signup">Signup !</a>
+            <a href="/login">Login !</a>
+        {% endif %}
+    </nav>
+
+    {% for message in get_flashed_messages() %}
+        <p class="message">{{message}}</p>
+    {% endfor %}
+
+    {% block content %}  {% endblock %}
+</body>
+</html>

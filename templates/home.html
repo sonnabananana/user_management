@@ -1,0 +1,36 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<table>
+
+    <colgroup>
+        <col>
+        <col>
+        <col>
+    </colgroup>
+
+    <tr>
+        <th>Picture</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+{% for row in result %}
+    <tr>
+        <td><img src="{{ row['image'] or 'static/images/default.png' }}" alt="profile" height="32"></td>
+        <td> {{ row["first_name"]}} </td>
+        <td> {{ row["last_name"]}} </td>
+        <td> <a href="mailto: {{ ['email'] }}">{{ row['email'] }}</a> </td>
+        
+        <td>
+            <a href="/view?id={{ row['id'] }}">View</a>
+            <a href="/delete?id={{ row['id'] }}" onclick="return confirm('Are you sure?')">Delete</a>
+            <a href="/update?id={{ row['id'] }}">Edit</a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

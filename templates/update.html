@@ -1,0 +1,40 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+
+    <input name="id" type ="hidden" value="{{ result['id'] }}">
+    <input name="old_password" type="hidden" value="{{ result['password'] }}">
+    <input name="old_image" type="hidden" value="{{ result['image'] or '' }}">
+
+    <label>First Name</label> 
+    <input name="first_name" value="{{ result['first_name'] }}">
+    <br>
+
+    <label>Last Name</label>
+    <input name="last_name" value="{{ result['last_name'] }}">
+    <br>
+
+    <label>Email</label>
+    <input name="email" type="email" value="{{ result['email'] }}">
+    <br>
+
+    <label>Password</label>
+    <input name="password" type="password">
+    <br>
+
+    <label>Date of Birth</label>
+    <input name="birthday" type="date" value="{{ result['birthday'] }}">
+    <br>
+
+    <label>Profile Picture</label>
+    <input name="image" type="file">
+    <br>
+
+
+    <button type="submit">Update</button>
+    
+</form>
+
+{% endblock %}

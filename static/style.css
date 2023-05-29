@@ -1,0 +1,120 @@
+table{
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 4px 6px;
+}
+
+tr:nth-child(2){
+   background-color: rgb(195, 226, 225); 
+}
+
+col:nth-child(2n + 1){
+    background-color: azure;
+}
+
+body {
+    background-color: lemonchiffon;
+    text-align: center;
+}   
+
+form, table
+{
+    font-family: Rockwell;
+    border: 1px solid #555;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #555;
+
+}
+
+input 
+{
+    border: 1px solid #555;
+    font-size: 1.2em;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+input:focus{
+    outline: 5px solid darksalmon;
+}
+
+textarea
+{
+    margin-bottom: 10px;
+}
+
+select
+{
+    background-color: darksalmon;
+    font-size: 1.2em;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+button
+{
+    appearance: none;
+    border: 2px outset darksalmon;
+    border-radius: 5px;
+    background-color: darksalmon;
+    color: white;
+    font-size: 1.2em;
+    padding: 5px 10px;
+}
+
+button:active 
+{
+    border: 2px inset darksalmon;
+}
+
+input[type=checkbox]
+{
+    appearance: none;
+    border: 1px solid black;
+    background-color: linen;
+    border-radius: 0;
+}
+
+
+nav
+{
+    background-color: bisque;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+nav a 
+{
+    background-color: whitesmoke;
+    margin: 4px;
+    padding: 4px;
+    text-decoration: none;
+    border-radius: 50px;
+}
+
+.message
+{
+    background-color: pink;
+}
+
+a{
+    background-color: whitesmoke;
+    margin: 4px;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 50px;  
+}
+
+img[alt=profile] {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;  /* Makes width and height the same */
+    object-fit: cover;    /* Crops instead of squashing */
+}
