@@ -155,7 +155,7 @@ def post():
             values = (request.args["id"])
             cursor.execute(sql, values)
             result = cursor.fetchone()
-    return "Here is the post: " + result["content"]
+    return render_template("post.html", result=result)
 
 # UPDATE
 # /update?id=1
