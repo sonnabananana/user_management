@@ -146,6 +146,16 @@ def view():
             result = cursor.fetchone()
     return render_template("view.html", result=result)
   
+# /post?id=1
+@app.route("/post")
+def post():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM posts WHERE id = %s"
+            values = (request.args["id"])
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
+    return "Here is the post: " + result["content"]
 
 # UPDATE
 # /update?id=1
