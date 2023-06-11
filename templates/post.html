@@ -2,6 +2,7 @@
 
 {% block content %}
 
-<p> {{ result["content"] }} </p>
+<!-- <h2>Post by {{ result["first_name"] }} {{ result["last_name"] }}</h2> -->
+{{ result["content"]|safe }}
 
 {% endblock %}

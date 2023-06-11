@@ -135,6 +135,20 @@ def signup():
     else:
         return render_template("signup.html")
 
+# IMAGE
+@app.route("/save-image", methods=["POST"])
+def save_image():
+    image = request.files["image"]
+    if image:
+        # Choose a random filename to prevent clashes
+        ext = os.path.splitext(image.filename)[1]
+        image_path = "static/images/" + str(uuid.uuid4())[:8] + ext
+        image.save(image_path)
+        image_path = "/" + image_path
+    else:
+        image_path = None
+    return { "default": image_path }
+
 # VIEW
 @app.route("/view")
 def view():
@@ -151,11 +165,27 @@ def view():
 def post():
     with create_connection() as connection:
         with connection.cursor() as cursor:
-            sql = "SELECT * FROM posts WHERE id = %s"
+            sql = """SELECT * FROM posts
+                     LEFT JOIN users ON posts.user_id = users.id
+                     WHERE posts.id = %s"""
             values = (request.args["id"])
             cursor.execute(sql, values)
             result = cursor.fetchone()
     return render_template("post.html", result=result)
+
+# ADD POST
+@app.route("/post/add", methods=["GET", "POST"])
+def add_post():
+    if request.method == "POST":
+        with create_connection() as connection:
+            with connection.cursor() as cursor: 
+                sql = "INSERT INTO posts (content) VALUES (%s)"
+                values = (request.form["content"])
+                cursor.execute(sql, values)
+                connection.commit()
+        return render_template("post_add.html")
+    else:
+        return render_template("post_add.html")
 
 # UPDATE
 # /update?id=1

@@ -1,0 +1,36 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<form method="post">
+    <label>Post content</label>
+    <textarea id="editor" name="content"> </textarea>
+    <button>Submit</button>
+</form>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script>
+ClassicEditor.create(document.querySelector('#editor'), {
+    extraPlugins: [
+        function(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => new class {
+                constructor(loader) {
+                    this.loader = loader;
+                }
+                async upload() {
+                    let file = await this.loader.file;
+                    let formData = new FormData();
+                    formData.append('image', file);
+                    let response = await fetch('/save-image', {
+                        method: 'post',
+                        body: formData,
+                    });
+                    return response.json();
+                }
+            }(loader);
+        }
+    ]
+});
+    </script>
+
+{% endblock %}
