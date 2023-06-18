@@ -177,13 +177,19 @@ def post():
 @app.route("/post/add", methods=["GET", "POST"])
 def add_post():
     if request.method == "POST":
-        with create_connection() as connection:
-            with connection.cursor() as cursor: 
-                sql = "INSERT INTO posts (content) VALUES (%s)"
-                values = (request.form["content"])
-                cursor.execute(sql, values)
-                connection.commit()
-        return render_template("post_add.html")
+        if "logged_in" in session:
+            with create_connection() as connection:
+                with connection.cursor() as cursor: 
+                    sql = "INSERT INTO posts (content, user_id) VALUES (%s, %s)"
+                    values = (
+                        request.form["content"],
+                        session["id"]
+                        )
+                    cursor.execute(sql, values)
+                    connection.commit()
+            return render_template("post_add.html")
+        else:
+            ...
     else:
         return render_template("post_add.html")
 
